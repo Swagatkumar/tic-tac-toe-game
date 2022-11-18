@@ -1,19 +1,22 @@
 import { useState } from "react";
+
 import Square from "../Square";
+
 import "./Board.css";
 
 const Board = () => {
   const [squares, setSquares] = useState<("X" | "O" | null)[]>(
     Array(9).fill(null)
   );
-  
+  const [turn, setTurn] = useState<'X' | 'O'>("X")
 
-  const status = "Next Player: X";
+  const status = `Next Player: ${turn}`;
 
   const handleClick = (i: number) => {
     const tempSquares = squares.slice();
-    tempSquares[i] = "X";
+    tempSquares[i] = turn;
     setSquares(tempSquares);
+    setTurn(prevTurn => prevTurn==="X"?"O":"X");
   };
   const renderSquare = (i: number) => (
     <Square value={squares[i]} onClick={() => handleClick(i)} />
