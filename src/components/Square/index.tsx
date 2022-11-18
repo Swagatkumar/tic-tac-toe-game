@@ -1,16 +1,14 @@
-import { useState } from "react";
 import "./Square.css";
 
 interface SquareProps {
-  value: number;
+  value: "X" | "O" | null;
+  onClick: () => void
 }
 
-const Square = ({ value }: SquareProps) => {
-  const [message, setMessage] = useState<string|null>(null);
-
+const Square = ({ value, onClick }: SquareProps) => {
   return (
-    <button className="square" onClick={() => setMessage('X')}>
-      {message}
+    <button className="square" onClick={onClick}>
+      {value}
     </button>
   );
 };
