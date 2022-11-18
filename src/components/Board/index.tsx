@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { calculateWinner } from "../../helper";
+
 import Square from "../Square";
 
 import "./Board.css";
@@ -10,10 +12,14 @@ const Board = () => {
   );
   const [turn, setTurn] = useState<'X' | 'O'>("X")
 
-  const status = `Next Player: ${turn}`;
+  const winner = calculateWinner(squares);
+  const status = winner?`Winner: ${winner}`:`Next Player: ${turn}`;
 
   const handleClick = (i: number) => {
     const tempSquares = squares.slice();
+    if(winner||tempSquares[i]){
+      return;
+    }
     tempSquares[i] = turn;
     setSquares(tempSquares);
     setTurn(prevTurn => prevTurn==="X"?"O":"X");
