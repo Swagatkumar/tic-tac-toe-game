@@ -1,9 +1,13 @@
 import './Square.css';
 
-const Square = () => {
+interface SquareProps{
+  value: number,
+}
+
+const Square = ({value}:SquareProps) => {
   return (
     <button className='square'>
-      {/* TODO */}
+      {value}
     </button>
   );
 }

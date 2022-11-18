@@ -2,7 +2,7 @@ import Square from "../Square";
 import "./Board.css";
 
 const Board = () => {
-  const renderSquare = (i:number) => <Square />;
+  const renderSquare = (i:number) => <Square value={i} />;
   const status = "Next Player: X";
   return <div>
     <div className="status">{status}</div>
