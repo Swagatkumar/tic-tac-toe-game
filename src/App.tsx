@@ -1,9 +1,7 @@
+import { Game } from "./components";
+
 function App() {
-  return (
-    <div>
-      Nothing here yet.
-    </div>
-  );
+  return <Game />;
 }
 
 export default App;
