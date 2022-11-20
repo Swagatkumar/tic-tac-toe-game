@@ -21,7 +21,7 @@ const Game = () => {
   const winner = calculateWinner(current.squares);
   const status = winner ? `Winner: ${winner}` : `Next Player: ${turn}`;
 
-  const jumpTo = (move: number): void => {};
+  const jumpTo = (step: number): void => {};
   const moves = history.map((move, idx) => {
     const message = idx ? `Go to move #${idx}` : "Go to the start";
 
