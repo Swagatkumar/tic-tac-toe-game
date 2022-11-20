@@ -1,18 +1,19 @@
 import { useState } from "react";
 
-import { calculateWinner } from "../../helper";
+import { calculateMoveId, calculateWinner } from "../../helper";
 
 import Board from "../Board";
 
 import "./Game.css";
 
 interface move {
+  id: string;
   squares: ("X" | "O" | null)[];
 }
 
 const Game = () => {
   const [history, setHistory] = useState<move[]>([
-    { squares: Array(9).fill(null) },
+    { id: "000000000", squares: Array(9).fill(null) },
   ]);
   const [turn, setTurn] = useState<"X" | "O">("X");
 
@@ -20,15 +21,13 @@ const Game = () => {
   const winner = calculateWinner(current.squares);
   const status = winner ? `Winner: ${winner}` : `Next Player: ${turn}`;
 
-  const jumpTo = (move: number): void => {
-
-  };
-  const moves = history.map((_, move) => {
-    const message = move ? `Go to move #${move}` : "Go to the start";
+  const jumpTo = (move: number): void => {};
+  const moves = history.map((move, idx) => {
+    const message = idx ? `Go to move #${idx}` : "Go to the start";
 
     return (
-      <li>
-        <button onClick={() => jumpTo(move)}>{message}</button>
+      <li key={move.id}>
+        <button onClick={() => jumpTo(idx)}>{message}</button>
       </li>
     );
   });
@@ -39,7 +38,7 @@ const Game = () => {
       return;
     }
     tempSquares[i] = turn;
-    setHistory((prevHistory) => prevHistory.concat([{ squares: tempSquares }]));
+    setHistory((prevHistory) => prevHistory.concat([{ id: calculateMoveId(tempSquares), squares: tempSquares }]));
     setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"));
   };
 
