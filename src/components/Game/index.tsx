@@ -20,6 +20,19 @@ const Game = () => {
   const winner = calculateWinner(current.squares);
   const status = winner ? `Winner: ${winner}` : `Next Player: ${turn}`;
 
+  const jumpTo = (move: number): void => {
+
+  };
+  const moves = history.map((_, move) => {
+    const message = move ? `Go to move #${move}` : "Go to the start";
+
+    return (
+      <li>
+        <button onClick={() => jumpTo(move)}>{message}</button>
+      </li>
+    );
+  });
+
   const handleClick = (i: number) => {
     const tempSquares = current.squares.slice();
     if (winner || tempSquares[i]) {
@@ -37,7 +50,7 @@ const Game = () => {
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <ol>{/* TODO */}</ol>
+        <ol>{moves}</ol>
       </div>
     </div>
   );
