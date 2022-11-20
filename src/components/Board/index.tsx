@@ -1,36 +1,19 @@
-import { useState } from "react";
-
-import { calculateWinner } from "../../helper";
-
 import Square from "../Square";
 
 import "./Board.css";
 
-const Board = () => {
-  const [squares, setSquares] = useState<("X" | "O" | null)[]>(
-    Array(9).fill(null)
-  );
-  const [turn, setTurn] = useState<'X' | 'O'>("X")
+interface BoardProps{
+  squares: ("X" | "O" | null)[],
+  onClick: (i: number) => void
+}
 
-  const winner = calculateWinner(squares);
-  const status = winner?`Winner: ${winner}`:`Next Player: ${turn}`;
-
-  const handleClick = (i: number) => {
-    const tempSquares = squares.slice();
-    if(winner||tempSquares[i]){
-      return;
-    }
-    tempSquares[i] = turn;
-    setSquares(tempSquares);
-    setTurn(prevTurn => prevTurn==="X"?"O":"X");
-  };
+const Board = ({squares, onClick}: BoardProps) => {
   const renderSquare = (i: number) => (
-    <Square value={squares[i]} onClick={() => handleClick(i)} />
+    <Square value={squares[i]} onClick={() => onClick(i)} />
   );
 
   return (
     <div>
-      <div className="status">{status}</div>
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
