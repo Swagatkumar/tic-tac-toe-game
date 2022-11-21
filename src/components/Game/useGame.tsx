@@ -28,7 +28,7 @@ const useGame = () => {
 
     return (
       <li key={move.id}>
-        <button onClick={() => jumpTo(idx)}>{message}</button>
+        <button onClick={() => jumpTo(idx)}>{idx===currentStep?<b>{message}</b>:message}</button>
       </li>
     );
   });
