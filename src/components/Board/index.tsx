@@ -14,21 +14,7 @@ const Board = ({squares, onClick}: BoardProps) => {
 
   return (
     <div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
+      {[0,1,2].map(row=><div className="board-row">{[0,1,2].map(col=>renderSquare(col+(3*row)))}</div>)}
     </div>
   );
 };
